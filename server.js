@@ -48,7 +48,7 @@ app.post('/add-employee', (req, res) => {
 });
 
 app.get('/employees', (req, res) => {
-    const fetchQuery = 'SELECT * FROM employee';
+    const fetchQuery = 'SELECT * FROM Employees';
 
     db.query(fetchQuery, (err, results) => {
         if (err) {
