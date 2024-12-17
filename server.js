@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+require('dotenv').config();
+
 
 const app = express();
 app.use(cors());
@@ -9,7 +11,7 @@ app.use(bodyParser.json());
 
 const db = mysql.createConnection(`mysql://root:HbccbTnDCnlGaGqRskEsYkWkUsVDooUu@autorack.proxy.rlwy.net:22819/railway`);
 
-db.connect(err => {
+db.connect(err => { 
     if (err) {
         console.error('Error connecting to MySQL Database:', err.message);
         throw err;
@@ -59,6 +61,7 @@ app.get('/employees', (req, res) => {
     });
 });
 
-app.listen(5000, () => {
+const PORT=5000
+app.listen(PORT, () => {
     console.log(`Server running on 5000`);
 });
