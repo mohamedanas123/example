@@ -91,6 +91,24 @@ app.put('/employees/:employeeId', (req, res) => {
     );
 });
 
+app.delete('/employees/:employeeId', (req, res) => {
+    const { employeeId } = req.params;
+
+    const deleteQuery = 'DELETE FROM Employees WHERE employeeId = ?';
+    db.query(deleteQuery, [employeeId], (err, result) => {
+        if (err) {
+            console.error('Error deleting employee:', err.message);
+            return res.status(500).send('Error deleting employee.');
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).send('Employee not found.');
+        }
+
+        res.send('Employee deleted successfully!');
+    });
+});
+
 const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`Server running on ${PORT}`);
